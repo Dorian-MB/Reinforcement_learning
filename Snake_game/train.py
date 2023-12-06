@@ -15,7 +15,7 @@ policy_kwargs = dict(
 )
 
 learning_rate_schedule = get_schedule_fn(0.0003)
-model = PPO("CnnPolicy", train_env, policy_kwargs=policy_kwargs, verbose=2)
+model = PPO("MlpPolicy", train_env, policy_kwargs=policy_kwargs, verbose=2)
 
 new_logger = configure("path_to_save_logs", ["stdout", "tensorboard"])
 model.set_logger(new_logger) # Run TensorBoard in a terminal: tensorboard --logdir=path_to_save_logs
