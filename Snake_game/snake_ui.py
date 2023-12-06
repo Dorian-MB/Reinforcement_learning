@@ -97,6 +97,7 @@ class SnakeGame:
         self.snake_grow = False
         self.game_over = False
         self.is_render_mode = False
+        self.raw_obs = self.get_raw_observation()
         
     def init_pygame(self):
         self.dis, self.font = init()  
@@ -165,16 +166,16 @@ class SnakeGame:
         if not_playing:
             done = False if snake_collision and border_collision else True
             if not done :
-                self._obs = self.get_observation()
-            return self._obs, self.score, done, {}
+                self.raw_obs = self.get_raw_observation()
+            return self.raw_obs, self.score, done, {}
     
-    def get_observation(self):
-        observation = np.zeros((N, N), dtype=np.int32)
+    def get_raw_observation(self):
+        raw_obs = np.zeros((N, N), dtype=np.int32)
         for cell, _ in self.snake.body:
             x, y = (cell.x-X)//SNAKE_SIZE, (cell.y-Y)//SNAKE_SIZE
-            observation[y, x] = 1
-        observation[self.food.y, self.food.x] = 2
-        return observation.reshape(1, N, N)
+            raw_obs[y, x] = 1
+        raw_obs[self.food.y, self.food.x] = 2
+        return raw_obs
     
     def draw(self):
         if not self.is_render_mode:  

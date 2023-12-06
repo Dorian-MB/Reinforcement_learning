@@ -21,8 +21,8 @@ new_logger = configure("path_to_save_logs", ["stdout", "tensorboard"])
 model.set_logger(new_logger) # Run TensorBoard in a terminal: tensorboard --logdir=path_to_save_logs
 
 
-total_timesteps = 200_000
-eval_interval = 50_000  
+total_timesteps = 10_000
+eval_interval = 10_000  
 num_eval_episodes = 10  
 
 # Training loop with periodic evaluation
